@@ -52,11 +52,12 @@ frontCameraButton.onclick = function() {
     // Toggle the frontCamera variable
     frontCamera = !frontCamera;
     // Setup the button text
+    const buttonText = frontCameraButton.querySelector('span');
     if (frontCamera) {
-        frontCameraButton.textContent = "Back Camera";
+        buttonText.textContent = "Back Camera";
     }
     else {
-        frontCameraButton.textContent = "Front Camera";
+        buttonText.textContent = "Front Camera";
     }
     // Start the video streaming
     cameraStart();

@@ -1,39 +1,53 @@
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- Name of the app -->
-        <title>Camera Mobile Website</title>
-
-        <!-- Link to main style sheet -->
-        <link rel="stylesheet" href="style.css"> 
+        <title>Camera App</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     </head>
     <body>
+        <div class="app-container">
+            <header class="app-header">
+                <div class="header-content">
+                    <h1 class="app-title">
+                        <svg class="camera-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                            <circle cx="12" cy="13" r="4"></circle>
+                        </svg>
+                        Camera App
+                    </h1>
+                </div>
+            </header>
 
-        <!-- Main content of the HTML -->
-        <main id="camera">
+            <main id="camera">
+                <canvas id="camera-view"></canvas>
+                <video id="camera-device" autoplay playsinline></video>
+                <img alt="Captured photo" id="photo-display">
 
-            <!-- Camera view -->
-            <!-- canvas: Area for drawing graphics on a web page -->
-            <canvas id="camera-view"></canvas>
-            
-            <!-- Camera device -->
-            <!-- Play the video streaming in "camera-view" -->
-            <video id="camera-device" autoplay playsinline></video>
-            
-            <!-- Photo display -->
-            <img alt="" id="photo-display">
+                <div class="controls-container">
+                    <button id="front-camera-button" class="control-btn secondary-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="17 1 21 5 17 9"></polyline>
+                            <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                            <polyline points="7 23 3 19 7 15"></polyline>
+                            <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+                        </svg>
+                        <span>Front Camera</span>
+                    </button>
 
-            <!-- Front camera button -->
-            <button id="front-camera-button">Front Camera Port</button>
+                    <button id="take-photo-button" class="control-btn primary-btn">
+                        <div class="capture-ring">
+                            <div class="capture-inner"></div>
+                        </div>
+                    </button>
+                </div>
+            </main>
+        </div>
 
-            <!-- Take photo button -->
-            <button id="take-photo-button">Capture Photo</button>
-
-        </main>
-
-        <!-- Reference to the JavaScript file -->
-        <script src="app.js"></script> 
+        <script src="app.js"></script>
     </body>
 </html>

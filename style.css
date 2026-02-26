@@ -1,75 +1,234 @@
-html, body{
-  margin: 0px;
-  padding: 0px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/*
-Style the element with id="camera", "camera-view", "camera-device", "photo-display"
-*/
-#camera, #camera-view, #camera-device, #photo-display{
-    position: fixed; /* Position of element is relative to the viewport */
-    object-fit: contain; /* The content is scaled to maintain its aspect ratio while fitting within the element's content box */
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     height: 100%;
-    width: 100%;
+    overflow: hidden;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-/*
-Style the element with id="camera-view", "camera-device", "photo-display"
-*/
-/*
-#camera-view, #camera-device, #photo-display{
-    transform: scaleX(-1);
+.app-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #0f0f0f;
 }
-*/
 
-/*
-Style the element with id="take-photo-button"
-*/
-#take-photo-button{
-    position: fixed;
-    bottom: 30px;
-    width: 100%;
-/*
-    width: 300px;
-    background-color: black;
+.app-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 1rem 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.app-title {
     color: white;
-    font-size: 20px;
-    border-radius: 30px;
-    border: 3px solid red; or "border: none;"
-    padding: 15px 20px;
-    text-align: center;
-    left: calc(50% - 150px);
-*/
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
-/*
-Style the element with id="take-photo-button"
-*/
-#front-camera-button{
-    position: fixed;
-    bottom: 80px;
+.camera-icon {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+#camera {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    overflow: hidden;
+}
+
+#camera-view, #camera-device, #photo-display {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-/*
-    width: 300px;
-    background-color: black;
-    color: white;
-    font-size: 20px;
-    border-radius: 30px;
-    border: 3px solid red; or "border: none;"
-    padding: 15px 20px;
-    text-align: center;
-    left: calc(50% - 150px);
-*/
+    height: 100%;
+    object-fit: cover;
 }
 
-/*
-Class "photo-taken", which is added to "cameraOutput" in file "app.js"
-*/
-.photo-taken{
-    height: 200px!important; /* !important => Overrides the predefined height property (e.g., 100%) */
-    width: 200px!important; /* !important => Overrides the predefined width property (e.g., 100%) */
-/*
-    top: 20px;
-    right: 20px;
-*/
+#camera-view {
+    display: none;
+}
+
+.controls-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem 1.5rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    z-index: 10;
+}
+
+.control-btn {
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    outline: none;
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+.secondary-btn {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.875rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.secondary-btn svg {
+    flex-shrink: 0;
+}
+
+.primary-btn {
+    background: transparent;
+    padding: 0;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.capture-ring {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.primary-btn:hover .capture-ring {
+    border-width: 5px;
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+.primary-btn:active .capture-ring {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.capture-inner {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: white;
+    transition: all 0.2s ease;
+}
+
+.primary-btn:active .capture-inner {
+    transform: scale(0.85);
+}
+
+.photo-taken {
+    width: 200px !important;
+    height: 200px !important;
+    top: 20px !important;
+    right: 20px !important;
+    left: auto !important;
+    border-radius: 16px;
+    border: 4px solid white;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    object-fit: cover;
+    animation: photoCapture 0.3s ease;
+    z-index: 50;
+}
+
+@keyframes photoCapture {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 640px) {
+    .app-title {
+        font-size: 1.25rem;
+    }
+    
+    .controls-container {
+        gap: 1.5rem;
+        padding: 1.5rem 1rem;
+    }
+    
+    .secondary-btn span {
+        display: none;
+    }
+    
+    .secondary-btn {
+        padding: 0.875rem;
+        width: 48px;
+        height: 48px;
+        justify-content: center;
+    }
+    
+    .primary-btn {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .capture-ring {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .capture-inner {
+        width: 52px;
+        height: 52px;
+    }
+    
+    .photo-taken {
+        width: 150px !important;
+        height: 150px !important;
+        top: 15px !important;
+        right: 15px !important;
+    }
 }
